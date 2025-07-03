@@ -420,6 +420,42 @@ nav a:hover, nav a:focus {
 .pika-label {
     color: #ffd700;
 }
+
+.bible-dropdown {
+    background: #19191b;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-size: 1.05em;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    padding: 6px 10px;
+    margin-right: 4px;
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+}
+.bible-dropdown:focus {
+    background: #ffd700;
+    color: #181824;
+}
+
+#bibleGoBtn {
+    background: #222;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-size: 1.05em;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+#bibleGoBtn:hover, #bibleGoBtn:focus {
+    background: #ffd700;
+    color: #181824;
+}
    
 @media (max-width: 600px) {
     .container {
