@@ -74,6 +74,88 @@ const BIBLE_BOOKS = [
   { name: "Revelation", chapters: 22 }
 ];
 
+function slugifyOcaBook(book) {
+  return book.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9\-]/g, '');
+}
+
+function populateBibleBooks() {
+  const bookSel = document.getElementById('bibleBook');
+  bookSel.innerHTML = '';
+  BIBLE_BOOKS.forEach((b, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = b.name;
+    bookSel.appendChild(opt);
+  });
+}
+
+function populateBibleChapters() {
+  const bookSel = document.getElementById('bibleBook');
+  const chapSel = document.getElementById('bibleChapter');
+  chapSel.innerHTML = '';
+  const book = BIBLE_BOOKS[bookSel.value];
+  for (let i = 1; i <= book.chapters; i++) {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `Chapter ${i}`;
+    chapSel.appendChild(opt);
+  }
+}
+
+async function loadBiblePassage() {
+  const bookSel = document.getElementById('bibleBook');
+  const chapSel = document.getElementById('bibleChapter');
+  const passageTitle = document.getElementById('biblePassageTitle');
+  const bibleContent = document.getElementById('bibleContent');
+  const book = BIBLE_BOOKS[bookSel.value].name;
+  const chapter = chapSel.value;
+
+  passageTitle.textContent = `${book} ${chapter}`;
+
+  // Try Orthocal API for the passage (e.g., "John 1")
+  const passageRef = `${book} ${chapter}`;
+  const orthocalUrl = `https://orthocal.info/api/passage/${encodeURIComponent(passageRef)}`;
+
+  try {
+    const res = await fetch(orthocalUrl);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.passage && data.passage.length > 0) {
+        bibleContent.innerHTML = data.passage.map(v =>
+          `<span class="bible-verse-num">${v.verse}</span> <span class="bible-verse-text">${v.content}</span>`
+        ).join(' ');
+        return;
+      }
+    }
+    // If not found, fall through to OCA Bible link
+  } catch (e) {
+    // ignore and fall through
+  }
+
+  // If passage not found, show OCA Bible link
+  const ocaUrl = `https://bible.oca.org/${slugifyOcaBook(book)}/${chapter}`;
+  bibleContent.innerHTML = `
+    <div style="margin-bottom:12px;">
+      <a href="${ocaUrl}" target="_blank" class="bible-link">Read ${book} ${chapter} at bible.oca.org</a>
+    </div>
+    <em>Full text viewing inside the app is only available for readings included in the OCA lectionary.</em>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  populateBibleBooks();
+  populateBibleChapters();
+
+  document.getElementById('bibleBook').addEventListener('change', function () {
+    populateBibleChapters();
+  });
+
+  document.getElementById('bibleGoBtn').addEventListener('click', function () {
+    loadBiblePassage();
+  });
+});
+
+
 // Helper to slugify book names for OCA URLs
 function slugifyOcaBook(book) {
   return book.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9\-]/g, '');
