@@ -420,24 +420,27 @@ nav a:hover, nav a:focus {
 .pika-label {
     color: #ffd700;
 }
-
-@media (max-width: 768px) {
+   
+@media (max-width: 600px) {
     .container {
-        padding: 7px;
+        padding: 4vw 2vw 10vw 2vw;
     }
     .header h1 {
         font-size: 1.08rem;
     }
-    .prayer-content {
-        font-size: 0.97em;
-        padding: 10px 2px;
-    }
     .card {
-        padding: 10px 3px;
+        padding: 4vw 2vw;
+        border-radius: 12px;
     }
     .toggle-btn {
         font-size: 0.97em;
         padding: 10px 0;
+    }
+    .prayer-content, .card .prayer-content {
+        padding: 4vw 2vw;
+        font-size: 1em;
+        border-radius: 8px;
+        max-height: 65vh;
     }
 }
 
