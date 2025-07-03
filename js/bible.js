@@ -1,4 +1,4 @@
-// Orthodox Bible book list and chapters (OCA order, simplified)
+// Orthodox Bible book list and chapters (OCA/LXX order, with all canonical books)
 const BIBLE_BOOKS = [
   { name: "Genesis", chapters: 50 },
   { name: "Exodus", chapters: 40 },
@@ -14,15 +14,19 @@ const BIBLE_BOOKS = [
   { name: "2 Kings", chapters: 25 },
   { name: "1 Chronicles", chapters: 29 },
   { name: "2 Chronicles", chapters: 36 },
+  { name: "1 Esdras", chapters: 9 },
   { name: "Ezra", chapters: 10 },
   { name: "Nehemiah", chapters: 13 },
   { name: "Tobit", chapters: 14 },
   { name: "Judith", chapters: 16 },
-  { name: "Esther", chapters: 10 },
+  { name: "Esther", chapters: 16 }, // LXX Esther is longer
   { name: "1 Maccabees", chapters: 16 },
   { name: "2 Maccabees", chapters: 15 },
+  { name: "3 Maccabees", chapters: 7 },
+  { name: "4 Maccabees", chapters: 18 },
   { name: "Job", chapters: 42 },
   { name: "Psalms", chapters: 151 },
+  { name: "Prayer of Manasseh", chapters: 1 },
   { name: "Proverbs", chapters: 31 },
   { name: "Ecclesiastes", chapters: 12 },
   { name: "Song of Songs", chapters: 8 },
@@ -30,9 +34,11 @@ const BIBLE_BOOKS = [
   { name: "Wisdom of Sirach", chapters: 51 },
   { name: "Isaiah", chapters: 66 },
   { name: "Jeremiah", chapters: 52 },
+  { name: "Baruch", chapters: 5 },
   { name: "Lamentations", chapters: 5 },
+  { name: "Epistle of Jeremiah", chapters: 1 },
   { name: "Ezekiel", chapters: 48 },
-  { name: "Daniel", chapters: 14 },
+  { name: "Daniel", chapters: 14 }, // LXX Daniel includes Susanna, Bel and the Dragon
   { name: "Hosea", chapters: 14 },
   { name: "Joel", chapters: 4 },
   { name: "Amos", chapters: 9 },
@@ -79,7 +85,7 @@ function populateBibleBooks() {
   bookSel.innerHTML = '';
   BIBLE_BOOKS.forEach((b, i) => {
     const opt = document.createElement('option');
-    opt.value = i;
+    opt.value = b.name;
     opt.textContent = b.name;
     bookSel.appendChild(opt);
   });
@@ -88,8 +94,8 @@ function populateBibleBooks() {
 function populateBibleChapters() {
   const bookSel = document.getElementById('bibleBook');
   const chapSel = document.getElementById('bibleChapter');
+  const book = BIBLE_BOOKS.find(b => b.name === bookSel.value);
   chapSel.innerHTML = '';
-  const book = BIBLE_BOOKS[bookSel.value];
   for (let i = 1; i <= book.chapters; i++) {
     const opt = document.createElement('option');
     opt.value = i;
@@ -99,30 +105,42 @@ function populateBibleChapters() {
 }
 
 async function loadBiblePassage() {
-  const bookSel = document.getElementById('bibleBook');
-  const chapSel = document.getElementById('bibleChapter');
+  const book = document.getElementById('bibleBook').value;
+  const chapter = document.getElementById('bibleChapter').value;
+  const version = document.getElementById('bibleVersion').value;
   const passageTitle = document.getElementById('biblePassageTitle');
   const bibleContent = document.getElementById('bibleContent');
-  const book = BIBLE_BOOKS[bookSel.value].name;
-  const chapter = chapSel.value;
 
-  passageTitle.textContent = `${book} ${chapter} (KJV)`;
+  passageTitle.textContent = `${book} ${chapter} (${version})`;
+  bibleContent.innerHTML = '<div class="loading">Loading...</div>';
 
-  // Use bible-api.com for KJV
-  const passageRef = `${book} ${chapter}`;
-  bibleContent.innerHTML = '<div class="loading">Loading KJV text...</div>';
+  // API expects book names like "Genesis", "Tobit", "Wisdom of Solomon" etc.
+  const apiUrl = `https://bible.helloao.org/api/${version}/${encodeURIComponent(book)}/${chapter}.json`;
+
   try {
-    const res = await fetch(`https://bible-api.com/${encodeURIComponent(passageRef)}?translation=kjv`);
+    const res = await fetch(apiUrl);
     if (res.ok) {
       const data = await res.json();
-      if (data.verses && data.verses.length > 0) {
-        bibleContent.innerHTML = data.verses.map(v =>
-          `<span class="bible-verse-num">${v.verse}</span> <span class="bible-verse-text">${v.text.trim()}</span>`
-        ).join(' ');
+      if (data && data.chapter && data.chapter.content) {
+        bibleContent.innerHTML = data.chapter.content.map(item => {
+          if (item.type === 'heading') {
+            return `<div class="bible-heading"><strong>${item.content.join(' ')}</strong></div>`;
+          }
+          if (item.type === 'verse') {
+            return `<span class="bible-verse-num">${item.number}</span> <span class="bible-verse-text">${item.content.join(' ')}</span>`;
+          }
+          if (item.type === 'line_break') {
+            return '<br>';
+          }
+          if (item.type === 'hebrew_subtitle') {
+            return `<div class="bible-hebrew-subtitle"><em>${item.content.join(' ')}</em></div>`;
+          }
+          return '';
+        }).join(' ');
         return;
       }
     }
-    bibleContent.innerHTML = `<div class="error">Passage not found in KJV.</div>`;
+    bibleContent.innerHTML = `<div class="error">Passage not found in ${version}.</div>`;
   } catch (e) {
     bibleContent.innerHTML = `<div class="error">Unable to load passage.</div>`;
   }
@@ -137,6 +155,10 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('bibleGoBtn').addEventListener('click', function () {
+    loadBiblePassage();
+  });
+
+  document.getElementById('bibleVersion').addEventListener('change', function () {
     loadBiblePassage();
   });
 });
