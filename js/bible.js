@@ -1,4 +1,4 @@
-// Orthodox Bible book list and chapters (OCA order, simplified for demo)
+// Orthodox Bible book list and chapters (OCA order, simplified)
 const BIBLE_BOOKS = [
   { name: "Genesis", chapters: 50 },
   { name: "Exodus", chapters: 40 },
@@ -74,10 +74,6 @@ const BIBLE_BOOKS = [
   { name: "Revelation", chapters: 22 }
 ];
 
-function slugifyOcaBook(book) {
-  return book.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9\-]/g, '');
-}
-
 function populateBibleBooks() {
   const bookSel = document.getElementById('bibleBook');
   bookSel.innerHTML = '';
@@ -110,36 +106,26 @@ async function loadBiblePassage() {
   const book = BIBLE_BOOKS[bookSel.value].name;
   const chapter = chapSel.value;
 
-  passageTitle.textContent = `${book} ${chapter}`;
+  passageTitle.textContent = `${book} ${chapter} (KJV)`;
 
-  // Try Orthocal API for the passage (e.g., "John 1")
+  // Use bible-api.com for KJV
   const passageRef = `${book} ${chapter}`;
-  const orthocalUrl = `https://orthocal.info/api/passage/${encodeURIComponent(passageRef)}`;
-
+  bibleContent.innerHTML = '<div class="loading">Loading KJV text...</div>';
   try {
-    const res = await fetch(orthocalUrl);
+    const res = await fetch(`https://bible-api.com/${encodeURIComponent(passageRef)}?translation=kjv`);
     if (res.ok) {
       const data = await res.json();
-      if (data && data.passage && data.passage.length > 0) {
-        bibleContent.innerHTML = data.passage.map(v =>
-          `<span class="bible-verse-num">${v.verse}</span> <span class="bible-verse-text">${v.content}</span>`
+      if (data.verses && data.verses.length > 0) {
+        bibleContent.innerHTML = data.verses.map(v =>
+          `<span class="bible-verse-num">${v.verse}</span> <span class="bible-verse-text">${v.text.trim()}</span>`
         ).join(' ');
         return;
       }
     }
-    // If not found, fall through to OCA Bible link
+    bibleContent.innerHTML = `<div class="error">Passage not found in KJV.</div>`;
   } catch (e) {
-    // ignore and fall through
+    bibleContent.innerHTML = `<div class="error">Unable to load passage.</div>`;
   }
-
-  // If passage not found, show OCA Bible link
-  const ocaUrl = `https://bible.oca.org/${slugifyOcaBook(book)}/${chapter}`;
-  bibleContent.innerHTML = `
-    <div style="margin-bottom:12px;">
-      <a href="${ocaUrl}" target="_blank" class="bible-link">Read ${book} ${chapter} at bible.oca.org</a>
-    </div>
-    <em>Full text viewing inside the app is only available for readings included in the OCA lectionary.</em>
-  `;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -154,3 +140,4 @@ document.addEventListener('DOMContentLoaded', function () {
     loadBiblePassage();
   });
 });
+
