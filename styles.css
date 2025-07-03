@@ -436,8 +436,8 @@ nav a:hover, nav a:focus {
     transition: background 0.2s, color 0.2s;
 }
 .bible-dropdown:focus {
-    background: #ffd700;
-    color: #181824;
+    background: #181824;
+    color: var(--green);
 }
 #bibleGoBtn {
     background: #222;
@@ -473,10 +473,6 @@ nav a:hover, nav a:focus {
     color: #e5e5e5;
     font-style: italic;
 }
-
-.bible-dropdown:focus {
-    background: #ffd700;
-    color: #181824;
 }
 #bibleGoBtn {
     background: #222;
