@@ -439,7 +439,6 @@ nav a:hover, nav a:focus {
     background: #ffd700;
     color: #181824;
 }
-
 #bibleGoBtn {
     background: #222;
     color: #ffd700;
@@ -455,6 +454,13 @@ nav a:hover, nav a:focus {
 #bibleGoBtn:hover, #bibleGoBtn:focus {
     background: #ffd700;
     color: #181824;
+}
+.bible-section {
+    margin: 18px 0;
+    padding: 12px 10px;
+    background: #19191b;
+    border-radius: 8px;
+    border-left: 4px solid #ffd700;
 }
    
 @media (max-width: 600px) {
