@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Montserrat:wght@700&display=swap');
+
+:root {
+    --bg: #101012;
+    --panel: #18181a;
+    --border: #222;
+    --gold: #ffd700;
+    --red: #e53935;
+    --green: #00ff90;
+    --text-main: #e5e5e5;
+    --text-dim: #b0b0b0;
+    --box-shadow: 0 0 0 2px #ffd70044, 0 2px 16px #000c;
+    --glow: 0 0 8px #ffd70099, 0 0 2px #ffd70055;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Georgia', serif;
+    margin: 0;
+    min-height: 100vh;
+    letter-spacing: 0.01em;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 12px 40px 12px;
+}
+
+.header {
+    background: var(--panel);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 32px;
+    padding: 28px 10px 18px 10px;
+    position: relative;
+}
+
+.header h1 {
+    color: var(--gold);
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.08em;
+    text-align:center;
+    margin: 0 0 12px 0;
+    text-shadow: 0 2px 16px #000, 0 0 4px #ffd70044;
+    text-transform: uppercase;
+}
+
+nav {
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+nav a {
+    color: var(--gold);
+    background: #1a1a1a;
+    border: 1.5px solid var(--gold);
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.08em;
+    padding: 6px 18px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 0 1.5px #ffd70033;
+}
+nav a:hover, nav a:focus {
+    background: var(--gold);
+    color: #181824;
+    border-color: var(--red);
+    box-shadow: 0 0 0 2.5px var(--red), 0 0 16px #ffd70055;
+    outline: none;
+}
+
+.date-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin: 28px 0 10px 0;
+}
+
+.nav-btn {
+    background: #18181a;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-size: 1.3em;
+    padding: 8px 18px;
+    cursor: pointer;
+    box-shadow: 0 0 0 2px #ffd70044;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.nav-btn:hover, .nav-btn:focus {
+    background: var(--gold);
+    color: #101012;
+    border-color: var(--red);
+    box-shadow: 0 0 0 2.5px var(--red), 0 0 12px #ffd70088;
+    outline: none;
+}
+
+.current-date {
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--green);
+    letter-spacing: 0.09em;
+    text-shadow: 0 1px 8px #0004;
+    background: #19191b;
+    padding: 6px 16px;
+    border-radius: 7px;
+    border: 1.5px solid #222;
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.current-date:hover, .current-date:focus {
+    background: #222;
+}
+
+.date-dropdown {
+    background: #222;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-size: 1.05em;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    margin-top: 2px;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+}
+.date-dropdown:focus {
+    background: #181824;
+    color: var(--green);
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 26px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #17171a;
+    border-radius: 10px;
+    padding: 22px 18px;
+    box-shadow: 0 0 0 2px #ffd70033, 0 2px 12px #000a;
+    border: 2px solid #222;
+    margin-bottom: 0;
+    position: relative;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+.card:hover, .card:focus-within {
+    box-shadow: 0 0 0 2.5px var(--gold), 0 4px 20px #ffd70033;
+    border: 2px solid var(--gold);
+}
+
+.card h3 {
+    color: var(--gold);
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    margin-bottom: 13px;
+    font-size: 1.18rem;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 4px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.readings-list {
+    list-style: none;
+    padding-left: 0;
+}
+.readings-list li {
+    margin: 7px 0;
+    padding: 8px 10px;
+    background: #19191b;
+    border-radius: 5px;
+    border-left: 4px solid var(--gold);
+    font-size: 1.05em;
+    font-family: 'Georgia', serif;
+    color: var(--text-main);
+}
+
+.saint-name {
+    font-weight: bold;
+    color: var(--gold);
+    margin-bottom: 7px;
+    font-size: 1.11em;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    letter-spacing: 0.07em;
+    text-shadow: 0 1px 8px #0004;
+    text-transform: uppercase;
+}
+.fasting-info {
+    padding: 13px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.09em;
+    background: #19191b;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    box-shadow: 0 2px 8px #0002;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    letter-spacing: 0.07em;
+}
+.fasting-strict { background-color: #210c0c; color: #ffd7a0;}
+.fasting-oil { background-color: #33230c; color: #ffd700;}
+.fasting-fish { background-color: #0e2210; color: #c2ffb1;}
+.fasting-none { background-color: #0c2110; color: #b6ffd7;}
+
+.prayer-section {
+    margin-top: 18px;
+}
+.prayer-toggle {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    justify-content: center;
+}
+.toggle-btn {
+    flex: 1;
+    padding: 13px 0;
+    background: #19191b;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    max-width: 200px;
+    text-transform: uppercase;
+    box-shadow: 0 0 0 1.5px #ffd70033;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.toggle-btn.active {
+    background: var(--gold);
+    color: #181824;
+    border: 2px solid var(--red);
+    box-shadow: 0 0 0 2.5px var(--red), 0 0 12px #ffd70099;
+}
+
+.prayer-content {
+    background: #151517;
+    padding: 21px 10px;
+    border-radius: 10px;
+    line-height: 1.7;
+    max-height: 520px;
+    overflow-y: auto;
+    font-size: 1.04em;
+    color: var(--text-main);
+    border: 1.5px solid #ffd70022;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.01em;
+    box-shadow: 0 0 0 2px #ffd70022;
+}
+
+.metania-highlight {
+    background-color: #ffd70022;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: var(--gold);
+    font-weight: 600;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    letter-spacing: 0.08em;
+}
+.prostration-note {
+    background: #2a1818;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-style: italic;
+    color: #ffd7a0;
+    border: 1.5px solid #ffd70033;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+}
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 17px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.control-btn {
+    padding: 8px 18px;
+    background: #19191b;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    text-transform: uppercase;
+}
+.control-btn:hover, .control-btn:focus {
+    background: var(--gold);
+    color: #181824;
+    border-color: var(--red);
+    outline: none;
+}
+
+.loading {
+    text-align: center;
+    color: var(--gold);
+    font-style: italic;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+}
+.error {
+    color: #ff6b6b;
+    text-align: center;
+    font-style: italic;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+}
+
+.bible-link {
+    color: #ffd700;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+.bible-link:hover, .bible-link:focus {
+    color: #e53935;
+    text-shadow: 0 0 6px #ffd70099;
+}
+.bible-passage {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    font-size: 1.04em;
+    color: #e5e5e5;
+    line-height: 1.6;
+    font-family: 'Georgia', serif;
+    transition: all 0.2s;
+}
+.bible-verse-num {
+    color: #ffd700;
+    font-size: 0.95em;
+    font-weight: bold;
+    margin-right: 2px;
+}
+.bible-verse-text {
+    color: #e5e5e5;
+}
+
+.ortho-cross {
+    color: #ffd700;
+    font-size: 1.35em;
+    font-family: 'Georgia', serif;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.chi-rho {
+    color: #e53935;
+    font-size: 1.3em;
+    font-family: 'Georgia', serif;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.icxc, .nika {
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    color: #e53935;
+    letter-spacing: 0.12em;
+    font-size: 1.1em;
+    margin-right: 2px;
+}
+.nika {
+    color: #e53935;
+}
+
+.pika-single {
+    background: #18181a;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    box-shadow: 0 2px 14px #000c;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+}
+.pika-table th, .pika-table td {
+    color: #ffd700;
+    font-weight: bold;
+}
+.pika-table td.is-selected, .pika-table td.is-selected .pika-button {
+    background: #e53935;
+    color: #fff;
+}
+.pika-button:hover, .pika-table td .pika-button:hover {
+    background: #ffd700;
+    color: #18181a;
+}
+.pika-title {
+    color: #ffd700;
+}
+.pika-label {
+    color: #ffd700;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 7px;
+    }
+    .header h1 {
+        font-size: 1.08rem;
+    }
+    .prayer-content {
+        font-size: 0.97em;
+        padding: 10px 2px;
+    }
+    .card {
+        padding: 10px 3px;
+    }
+    .toggle-btn {
+        font-size: 0.97em;
+        padding: 10px 0;
+    }
+}
+
+
+

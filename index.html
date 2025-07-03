@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Daily Orthodox Companion</title>
+        <link rel="stylesheet" href="styles.css">
+        <!-- Pikaday Calendar CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+        <!-- Pikaday Calendar JS -->
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+        <!-- Luxon for timezone handling -->
+        <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+      </head>      
+<body>
+  <div class="container">
+    <div style="text-align:center; margin-top:2em;">
+        <span class="ortho-cross">&#9766;</span> <span class="icxc">ICXC</span> <span class="ortho-cross">&#9766;</span> <span class="nika">NIKA</span> <span class="ortho-cross">&#9766;</span> 
+      </div>           
+    <div class="header">
+      <h1>Daily Orthodox Companion</h1>
+      <nav>
+        <a href="index.html">Home</a> |
+        <a href="prayers.html">Prayer Rule</a>
+      </nav>
+      <div class="date-nav" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <button class="nav-btn" onclick="changeDate(-1)" tabindex="0" aria-label="Previous Day">‹</button>
+          <span id="currentDate" class="current-date" style="min-width: 200px; text-align: center; display: inline-block;"></span>
+          <button class="nav-btn" onclick="changeDate(1)" tabindex="0" aria-label="Next Day">›</button>
+        </div>
+        <div style="margin-top: 8px;">
+            <select id="dateDropdown" class="date-dropdown" style="font-size:1em; padding: 6px 18px; border-radius: 8px;">
+              <!-- Options will be filled by JS -->
+            </select>
+          </div>          
+      </div>                                                  
+    </div>
+    <div class="main-content">
+      <div class="card">
+        <h3><span class="ortho-cross">&#9766;</span> Daily Readings</h3>
+        <ul class="readings-list" id="readings">
+          <li class="loading">Loading readings...</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ortho-cross">&#9766;</span> Saints & Feasts</h3>
+        <div id="saints" class="loading">Loading saints...</div>
+      </div>
+      <div class="card">
+        <h3><span class="chi-rho">&#9767;</span> Fasting</h3>
+        <div class="fasting-info" id="fasting">Loading fasting info...</div>  
+      </div>    
+    </div>
+  </div>
+  <script src="js/api.js"></script>
+</body>
+</html>
