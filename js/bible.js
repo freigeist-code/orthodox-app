@@ -1,88 +1,88 @@
-// Orthodox Canon Book List & Bolls.life Mapping (expand as needed)
-const BOLLS_BOOKS = [
-  { name: "Genesis", lxx: 1, kjv: 1, chapters: 50 },
-  { name: "Exodus", lxx: 2, kjv: 2, chapters: 40 },
-  { name: "Leviticus", lxx: 3, kjv: 3, chapters: 27 },
-  { name: "Numbers", lxx: 4, kjv: 4, chapters: 36 },
-  { name: "Deuteronomy", lxx: 5, kjv: 5, chapters: 34 },
-  { name: "Joshua", lxx: 6, kjv: 6, chapters: 24 },
-  { name: "Judges", lxx: 7, kjv: 7, chapters: 21 },
-  { name: "Ruth", lxx: 8, kjv: 8, chapters: 4 },
-  { name: "1 Samuel", lxx: 9, kjv: 9, chapters: 31 },
-  { name: "2 Samuel", lxx: 10, kjv: 10, chapters: 24 },
-  { name: "1 Kings", lxx: 11, kjv: 11, chapters: 22 },
-  { name: "2 Kings", lxx: 12, kjv: 12, chapters: 25 },
-  { name: "1 Chronicles", lxx: 13, kjv: 13, chapters: 29 },
-  { name: "2 Chronicles", lxx: 14, kjv: 14, chapters: 36 },
-  { name: "1 Esdras", lxx: 15, kjv: null, chapters: 9 },
-  { name: "Ezra", lxx: 16, kjv: 15, chapters: 10 },
-  { name: "Nehemiah", lxx: 17, kjv: 16, chapters: 13 },
-  { name: "Tobit", lxx: 18, kjv: null, chapters: 14 },
-  { name: "Judith", lxx: 19, kjv: null, chapters: 16 },
-  { name: "Esther", lxx: 20, kjv: 17, chapters: 16 },
-  { name: "1 Maccabees", lxx: 21, kjv: null, chapters: 16 },
-  { name: "2 Maccabees", lxx: 22, kjv: null, chapters: 15 },
-  { name: "3 Maccabees", lxx: 23, kjv: null, chapters: 7 },
-  { name: "4 Maccabees", lxx: 24, kjv: null, chapters: 18 },
-  { name: "Job", lxx: 25, kjv: 18, chapters: 42 },
-  { name: "Psalms", lxx: 26, kjv: 19, chapters: 151 },
-  { name: "Proverbs", lxx: 27, kjv: 20, chapters: 31 },
-  { name: "Ecclesiastes", lxx: 28, kjv: 21, chapters: 12 },
-  { name: "Song of Songs", lxx: 29, kjv: 22, chapters: 8 },
-  { name: "Wisdom of Solomon", lxx: 30, kjv: null, chapters: 19 },
-  { name: "Wisdom of Sirach", lxx: 31, kjv: null, chapters: 51 },
-  { name: "Isaiah", lxx: 32, kjv: 23, chapters: 66 },
-  { name: "Jeremiah", lxx: 33, kjv: 24, chapters: 52 },
-  { name: "Baruch", lxx: 34, kjv: null, chapters: 5 },
-  { name: "Lamentations", lxx: 35, kjv: 25, chapters: 5 },
-  { name: "Epistle of Jeremiah", lxx: 36, kjv: null, chapters: 1 },
-  { name: "Ezekiel", lxx: 37, kjv: 26, chapters: 48 },
-  { name: "Daniel", lxx: 38, kjv: 27, chapters: 14 },
-  { name: "Hosea", lxx: 39, kjv: 28, chapters: 14 },
-  { name: "Joel", lxx: 40, kjv: 29, chapters: 4 },
-  { name: "Amos", lxx: 41, kjv: 30, chapters: 9 },
-  { name: "Obadiah", lxx: 42, kjv: 31, chapters: 1 },
-  { name: "Jonah", lxx: 43, kjv: 32, chapters: 4 },
-  { name: "Micah", lxx: 44, kjv: 33, chapters: 7 },
-  { name: "Nahum", lxx: 45, kjv: 34, chapters: 3 },
-  { name: "Habakkuk", lxx: 46, kjv: 35, chapters: 3 },
-  { name: "Zephaniah", lxx: 47, kjv: 36, chapters: 3 },
-  { name: "Haggai", lxx: 48, kjv: 37, chapters: 2 },
-  { name: "Zechariah", lxx: 49, kjv: 38, chapters: 14 },
-  { name: "Malachi", lxx: 50, kjv: 39, chapters: 4 },
-  { name: "Matthew", lxx: 51, kjv: 40, chapters: 28 },
-  { name: "Mark", lxx: 52, kjv: 41, chapters: 16 },
-  { name: "Luke", lxx: 53, kjv: 42, chapters: 24 },
-  { name: "John", lxx: 54, kjv: 43, chapters: 21 },
-  { name: "Acts", lxx: 55, kjv: 44, chapters: 28 },
-  { name: "Romans", lxx: 56, kjv: 45, chapters: 16 },
-  { name: "1 Corinthians", lxx: 57, kjv: 46, chapters: 16 },
-  { name: "2 Corinthians", lxx: 58, kjv: 47, chapters: 13 },
-  { name: "Galatians", lxx: 59, kjv: 48, chapters: 6 },
-  { name: "Ephesians", lxx: 60, kjv: 49, chapters: 6 },
-  { name: "Philippians", lxx: 61, kjv: 50, chapters: 4 },
-  { name: "Colossians", lxx: 62, kjv: 51, chapters: 4 },
-  { name: "1 Thessalonians", lxx: 63, kjv: 52, chapters: 5 },
-  { name: "2 Thessalonians", lxx: 64, kjv: 53, chapters: 3 },
-  { name: "1 Timothy", lxx: 65, kjv: 54, chapters: 6 },
-  { name: "2 Timothy", lxx: 66, kjv: 55, chapters: 4 },
-  { name: "Titus", lxx: 67, kjv: 56, chapters: 3 },
-  { name: "Philemon", lxx: 68, kjv: 57, chapters: 1 },
-  { name: "Hebrews", lxx: 69, kjv: 58, chapters: 13 },
-  { name: "James", lxx: 70, kjv: 59, chapters: 5 },
-  { name: "1 Peter", lxx: 71, kjv: 60, chapters: 5 },
-  { name: "2 Peter", lxx: 72, kjv: 61, chapters: 3 },
-  { name: "1 John", lxx: 73, kjv: 62, chapters: 5 },
-  { name: "2 John", lxx: 74, kjv: 63, chapters: 1 },
-  { name: "3 John", lxx: 75, kjv: 64, chapters: 1 },
-  { name: "Jude", lxx: 76, kjv: 65, chapters: 1 },
-  { name: "Revelation", lxx: 77, kjv: 66, chapters: 22 }
+// Orthodox Canon Book List with Elpenor Slugs
+const BIBLE_BOOKS = [
+  { name: "Genesis", slug: "genesis", chapters: 50 },
+  { name: "Exodus", slug: "exodus", chapters: 40 },
+  { name: "Leviticus", slug: "leviticus", chapters: 27 },
+  { name: "Numbers", slug: "numbers", chapters: 36 },
+  { name: "Deuteronomy", slug: "deuteronomy", chapters: 34 },
+  { name: "Joshua", slug: "joshua", chapters: 24 },
+  { name: "Judges", slug: "judges", chapters: 21 },
+  { name: "Ruth", slug: "ruth", chapters: 4 },
+  { name: "1 Samuel", slug: "kings-i", chapters: 31 },
+  { name: "2 Samuel", slug: "kings-ii", chapters: 24 },
+  { name: "1 Kings", slug: "kings-iii", chapters: 22 },
+  { name: "2 Kings", slug: "kings-iv", chapters: 25 },
+  { name: "1 Chronicles", slug: "chronicles-i", chapters: 29 },
+  { name: "2 Chronicles", slug: "chronicles-ii", chapters: 36 },
+  { name: "1 Esdras", slug: "esdras-a", chapters: 9 },
+  { name: "Ezra", slug: "esdras-b", chapters: 10 },
+  { name: "Nehemiah", slug: "nehemiah", chapters: 13 },
+  { name: "Tobit", slug: "tobit", chapters: 14 },
+  { name: "Judith", slug: "judith", chapters: 16 },
+  { name: "Esther", slug: "esther", chapters: 16 },
+  { name: "1 Maccabees", slug: "maccabees-i", chapters: 16 },
+  { name: "2 Maccabees", slug: "maccabees-ii", chapters: 15 },
+  { name: "3 Maccabees", slug: "maccabees-iii", chapters: 7 },
+  { name: "4 Maccabees", slug: "maccabees-iv", chapters: 18 },
+  { name: "Job", slug: "job", chapters: 42 },
+  { name: "Psalms", slug: "psalms", chapters: 151 },
+  { name: "Proverbs", slug: "proverbs", chapters: 31 },
+  { name: "Ecclesiastes", slug: "ecclesiastes", chapters: 12 },
+  { name: "Song of Songs", slug: "song-of-songs", chapters: 8 },
+  { name: "Wisdom of Solomon", slug: "wisdom", chapters: 19 },
+  { name: "Wisdom of Sirach", slug: "sirach", chapters: 51 },
+  { name: "Isaiah", slug: "isaiah", chapters: 66 },
+  { name: "Jeremiah", slug: "jeremiah", chapters: 52 },
+  { name: "Baruch", slug: "baruch", chapters: 5 },
+  { name: "Lamentations", slug: "lamentations", chapters: 5 },
+  { name: "Epistle of Jeremiah", slug: "jeremiah-epistle", chapters: 1 },
+  { name: "Ezekiel", slug: "ezekiel", chapters: 48 },
+  { name: "Daniel", slug: "daniel", chapters: 14 },
+  { name: "Hosea", slug: "hosea", chapters: 14 },
+  { name: "Joel", slug: "joel", chapters: 4 },
+  { name: "Amos", slug: "amos", chapters: 9 },
+  { name: "Obadiah", slug: "obadiah", chapters: 1 },
+  { name: "Jonah", slug: "jonah", chapters: 4 },
+  { name: "Micah", slug: "micah", chapters: 7 },
+  { name: "Nahum", slug: "nahum", chapters: 3 },
+  { name: "Habakkuk", slug: "habakkuk", chapters: 3 },
+  { name: "Zephaniah", slug: "zephaniah", chapters: 3 },
+  { name: "Haggai", slug: "haggai", chapters: 2 },
+  { name: "Zechariah", slug: "zechariah", chapters: 14 },
+  { name: "Malachi", slug: "malachi", chapters: 4 },
+  { name: "Matthew", slug: "matthew", chapters: 28 },
+  { name: "Mark", slug: "mark", chapters: 16 },
+  { name: "Luke", slug: "luke", chapters: 24 },
+  { name: "John", slug: "john", chapters: 21 },
+  { name: "Acts", slug: "acts", chapters: 28 },
+  { name: "Romans", slug: "romans", chapters: 16 },
+  { name: "1 Corinthians", slug: "corinthians-i", chapters: 16 },
+  { name: "2 Corinthians", slug: "corinthians-ii", chapters: 13 },
+  { name: "Galatians", slug: "galatians", chapters: 6 },
+  { name: "Ephesians", slug: "ephesians", chapters: 6 },
+  { name: "Philippians", slug: "philippians", chapters: 4 },
+  { name: "Colossians", slug: "colossians", chapters: 4 },
+  { name: "1 Thessalonians", slug: "thessalonians-i", chapters: 5 },
+  { name: "2 Thessalonians", slug: "thessalonians-ii", chapters: 3 },
+  { name: "1 Timothy", slug: "timothy-i", chapters: 6 },
+  { name: "2 Timothy", slug: "timothy-ii", chapters: 4 },
+  { name: "Titus", slug: "titus", chapters: 3 },
+  { name: "Philemon", slug: "philemon", chapters: 1 },
+  { name: "Hebrews", slug: "hebrews", chapters: 13 },
+  { name: "James", slug: "james", chapters: 5 },
+  { name: "1 Peter", slug: "peter-i", chapters: 5 },
+  { name: "2 Peter", slug: "peter-ii", chapters: 3 },
+  { name: "1 John", slug: "john-i", chapters: 5 },
+  { name: "2 John", slug: "john-ii", chapters: 1 },
+  { name: "3 John", slug: "john-iii", chapters: 1 },
+  { name: "Jude", slug: "jude", chapters: 1 },
+  { name: "Revelation", slug: "revelation", chapters: 22 }
 ];
 
 function populateBibleBooks() {
   const bookSel = document.getElementById('bibleBook');
   bookSel.innerHTML = '';
-  BOLLS_BOOKS.forEach((b, i) => {
+  BIBLE_BOOKS.forEach((b, i) => {
     const opt = document.createElement('option');
     opt.value = i;
     opt.textContent = b.name;
@@ -93,7 +93,7 @@ function populateBibleBooks() {
 function populateBibleChapters() {
   const bookSel = document.getElementById('bibleBook');
   const chapSel = document.getElementById('bibleChapter');
-  const book = BOLLS_BOOKS[bookSel.value];
+  const book = BIBLE_BOOKS[bookSel.value];
   chapSel.innerHTML = '';
   for (let i = 1; i <= book.chapters; i++) {
     const opt = document.createElement('option');
@@ -103,72 +103,65 @@ function populateBibleChapters() {
   }
 }
 
-// Fetch all verses in a chapter and display them
-async function fetchChapter(translation, bookNum, chapterNum, numVerses) {
-  let versesHtml = '';
-  for (let v = 1; v <= numVerses; v++) {
-    const url = `https://bolls.life/get-verse/${translation}/${bookNum}/${chapterNum}/${v}/`;
-    try {
-      const res = await fetch(url);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.text) {
-          versesHtml += `<span class="bible-verse-num">${v}</span> <span class="bible-verse-text">${data.text}</span> `;
-        }
-      }
-    } catch (e) {
-      versesHtml += `<span class="bible-verse-num">${v}</span> <span class="bible-verse-text error">[Error]</span> `;
-    }
-  }
-  return versesHtml;
-}
-
 async function loadBiblePassage() {
   const bookSel = document.getElementById('bibleBook');
   const chapSel = document.getElementById('bibleChapter');
   const versionSel = document.getElementById('bibleVersion');
   const passageTitle = document.getElementById('biblePassageTitle');
   const bibleContent = document.getElementById('bibleContent');
-  const book = BOLLS_BOOKS[bookSel.value];
-  const chapter = parseInt(chapSel.value, 10);
+  const book = BIBLE_BOOKS[bookSel.value];
+  const chapter = chapSel.value;
   const version = versionSel.value;
 
   passageTitle.textContent = `${book.name} ${chapter} (${version})`;
   bibleContent.innerHTML = '<div class="loading">Loading...</div>';
 
-  const bookNum = version === 'LXX' ? book.lxx : book.kjv;
-  if (!bookNum) {
-    bibleContent.innerHTML = `<div class="error">This book is not available in the selected version.</div>`;
-    return;
-  }
-
-  // Estimate number of verses: fetch up to 200, but stop if blank is returned
-  let versesHtml = '';
-  let foundAny = false;
-  for (let v = 1; v <= 200; v++) {
-    const url = `https://bolls.life/get-verse/${version}/${bookNum}/${chapter}/${v}/`;
+  if (version === "KJV") {
+    // --- KJV API ---
     try {
+      const ref = `${book.name} ${chapter}`;
+      const url = `https://bible-api.com/${encodeURIComponent(ref)}?translation=kjv`;
       const res = await fetch(url);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.text && data.text.trim() !== "") {
-          foundAny = true;
-          versesHtml += `<span class="bible-verse-num">${v}</span> <span class="bible-verse-text">${data.text}</span> `;
-        } else {
-          // No more verses in this chapter
-          break;
-        }
-      } else {
-        break;
+      const data = await res.json();
+      if (data.verses && data.verses.length > 0) {
+        bibleContent.innerHTML = data.verses.map(v =>
+          `<span class="bible-verse-num">${v.verse}</span> <span class="bible-verse-text">${v.text.trim()}</span>`
+        ).join(' ');
+        return;
       }
+      bibleContent.innerHTML = `<div class="error">No verses found for this chapter.</div>`;
     } catch (e) {
-      break;
+      bibleContent.innerHTML = `<div class="error">Unable to load passage.</div>`;
     }
-  }
-  if (foundAny) {
-    bibleContent.innerHTML = versesHtml;
-  } else {
-    bibleContent.innerHTML = `<div class="error">No verses found for this chapter.</div>`;
+  } else if (version === "LXX") {
+    // --- LXX Brenton via Elpenor ---
+    try {
+      // Elpenor URLs: https://www.ellopos.net/elpenor/greek-texts/septuagint/genesis/1.asp
+      const url = `https://www.ellopos.net/elpenor/greek-texts/septuagint/${book.slug}/${chapter}.asp`;
+      // Use a CORS proxy (allorigins)
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+      const res = await fetch(proxyUrl);
+      const data = await res.json();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data.contents, "text/html");
+      // The English verses are in the right column, which is the 2nd <td> in each <tr>
+      const rows = doc.querySelectorAll("table tr");
+      let versesHtml = '';
+      let verseNum = 1;
+      rows.forEach(row => {
+        const tds = row.querySelectorAll("td");
+        if (tds.length === 2) {
+          const text = tds[1].textContent.trim();
+          if (text) {
+            versesHtml += `<span class="bible-verse-num">${verseNum}</span> <span class="bible-verse-text">${text}</span> `;
+            verseNum++;
+          }
+        }
+      });
+      bibleContent.innerHTML = versesHtml || `<div class="error">No English LXX text found for this chapter.</div>`;
+    } catch (e) {
+      bibleContent.innerHTML = `<div class="error">Unable to load LXX passage.</div>`;
+    }
   }
 }
 
@@ -188,5 +181,6 @@ document.addEventListener('DOMContentLoaded', function () {
     loadBiblePassage();
   });
 });
+
 
 
