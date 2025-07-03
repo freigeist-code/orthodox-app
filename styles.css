@@ -157,12 +157,17 @@ nav a:hover, nav a:focus {
 .card {
     background: #17171a;
     border-radius: 10px;
-    padding: 22px 18px;
+    padding: 22px 4vw; /* Use vw for padding on mobile */
     box-shadow: 0 0 0 2px #ffd70033, 0 2px 12px #000a;
     border: 2px solid #222;
     margin-bottom: 0;
     position: relative;
     transition: box-shadow 0.2s, border 0.2s;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
 }
 .card:hover, .card:focus-within {
     box-shadow: 0 0 0 2.5px var(--gold), 0 4px 20px #ffd70033;
@@ -256,9 +261,9 @@ nav a:hover, nav a:focus {
     box-shadow: 0 0 0 2.5px var(--red), 0 0 12px #ffd70099;
 }
 
-.prayer-content {
+.prayer-content, .card .prayer-content {
     background: #151517;
-    padding: 21px 10px;
+    padding: 5vw 3vw;
     border-radius: 10px;
     line-height: 1.7;
     max-height: 520px;
@@ -269,6 +274,9 @@ nav a:hover, nav a:focus {
     font-family: 'Georgia', serif;
     letter-spacing: 0.01em;
     box-shadow: 0 0 0 2px #ffd70022;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .metania-highlight {
