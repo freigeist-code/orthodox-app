@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orthodox Bible</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div style="text-align:center; margin-top:2em;">
+      <span class="ortho-cross">&#9766;</span> <span class="icxc">ICXC</span>
+      <span class="ortho-cross">&#9766;</span> <span class="nika">NIKA</span>
+      <span class="ortho-cross">&#9766;</span>
+    </div>
+    <div class="header">
+      <h1>Orthodox Bible</h1>
+      <nav>
+        <a href="index.html">Home</a> |
+        <a href="prayers.html">Prayer Rule</a> |
+        <a href="bible.html">Bible</a>
+      </nav>
+      <div class="bible-nav" style="margin: 16px 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <select id="bibleBook" class="bible-dropdown"></select>
+        <select id="bibleChapter" class="bible-dropdown"></select>
+        <select id="bibleVerse" class="bible-dropdown" style="display:none;"></select>
+        <button id="bibleGoBtn" class="nav-btn" style="font-size:1em;">Go</button>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="card">
+        <h3><span class="ortho-cross">&#9766;</span> <span id="biblePassageTitle">Select a passage</span></h3>
+        <div id="bibleContent" class="prayer-content" style="min-height:120px;">
+          <em>Please select a book and chapter to view the text.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/bible.js"></script>
+</body>
+</html>
 
