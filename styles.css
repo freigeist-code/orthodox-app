@@ -462,6 +462,41 @@ nav a:hover, nav a:focus {
     border-radius: 8px;
     border-left: 4px solid #ffd700;
 }
+.bible-heading {
+    margin: 12px 0 6px 0;
+    font-size: 1.07em;
+    color: #ffd700;
+}
+.bible-hebrew-subtitle {
+    margin: 8px 0 4px 0;
+    font-size: 1em;
+    color: #e5e5e5;
+    font-style: italic;
+}
+
+.bible-dropdown:focus {
+    background: #ffd700;
+    color: #181824;
+}
+#bibleGoBtn {
+    background: #222;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-size: 1.05em;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.bible-section {
+    margin: 18px 0;
+    padding: 12px 10px;
+    background: #19191b;
+    border-radius: 8px;
+    border-left: 4px solid #ffd700;
+}
    
 @media (max-width: 600px) {
     .container {
