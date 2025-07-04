@@ -93,6 +93,32 @@ function populateBibleChapters() {
   }
 }
 
+function updateArrowButtons() {
+  const bookSel = document.getElementById('bibleBook');
+  const chapSel = document.getElementById('bibleChapter');
+  const prevBtn = document.getElementById('prevChapterBtn');
+  const nextBtn = document.getElementById('nextChapterBtn');
+  const book = BOOKS[bookSel.value];
+  const chapter = parseInt(chapSel.value, 10);
+
+  prevBtn.disabled = (chapter === 1 && bookSel.value == 0);
+  nextBtn.disabled = (chapter === book.chapters && bookSel.value == BOOKS.length - 1);
+  // Disable prev if at first chapter of first book
+  // Disable next if at last chapter of last book
+  if (chapter > 1) {
+    prevBtn.disabled = false;
+  }
+  if (chapter < book.chapters) {
+    nextBtn.disabled = false;
+  }
+  if (chapter === 1 && bookSel.value == 0) {
+    prevBtn.disabled = true;
+  }
+  if (chapter === book.chapters && bookSel.value == BOOKS.length - 1) {
+    nextBtn.disabled = true;
+  }
+}
+
 function loadBiblePassage() {
   const bookSel = document.getElementById('bibleBook');
   const chapSel = document.getElementById('bibleChapter');
@@ -103,6 +129,8 @@ function loadBiblePassage() {
 
   passageTitle.textContent = `${book.name} ${chapter} (KJV)`;
   bibleContent.innerHTML = '<div class="loading">Loading...</div>';
+
+  updateArrowButtons();
 
   if (!book.kjv) {
     bibleContent.innerHTML = `<div class="error">This book is not in the KJV.</div>`;
@@ -127,17 +155,62 @@ function loadBiblePassage() {
   }
 }
 
+function goToPrevChapter() {
+  const bookSel = document.getElementById('bibleBook');
+  const chapSel = document.getElementById('bibleChapter');
+  let bookIdx = parseInt(bookSel.value, 10);
+  let chapter = parseInt(chapSel.value, 10);
+
+  if (chapter > 1) {
+    chapSel.value = chapter - 1;
+  } else if (bookIdx > 0) {
+    bookSel.value = bookIdx - 1;
+    populateBibleChapters();
+    chapSel.value = BOOKS[bookSel.value].chapters;
+  }
+  loadBiblePassage();
+}
+
+function goToNextChapter() {
+  const bookSel = document.getElementById('bibleBook');
+  const chapSel = document.getElementById('bibleChapter');
+  let bookIdx = parseInt(bookSel.value, 10);
+  let chapter = parseInt(chapSel.value, 10);
+
+  if (chapter < BOOKS[bookIdx].chapters) {
+    chapSel.value = chapter + 1;
+  } else if (bookIdx < BOOKS.length - 1) {
+    bookSel.value = bookIdx + 1;
+    populateBibleChapters();
+    chapSel.value = 1;
+  }
+  loadBiblePassage();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   populateBibleBooks();
   populateBibleChapters();
+  updateArrowButtons();
 
   document.getElementById('bibleBook').addEventListener('change', function () {
     populateBibleChapters();
+    loadBiblePassage();
+  });
+
+  document.getElementById('bibleChapter').addEventListener('change', function () {
+    loadBiblePassage();
   });
 
   document.getElementById('bibleGoBtn').addEventListener('click', function () {
     loadBiblePassage();
   });
-});
 
+  document.getElementById('prevChapterBtn').addEventListener('click', function () {
+    goToPrevChapter();
+  });
+
+  document.getElementById('nextChapterBtn').addEventListener('click', function () {
+    goToNextChapter();
+  });
+});
 
