@@ -81,11 +81,6 @@ const BOOKS = [
   { name: "Revelation", lxx: "Revelation", kjv: "Revelation", chapters: 22 }
 ];
 
-// Load the JSON once on page load
-fetch('js/brenton-lxx-complete.json')
-  .then(res => res.json())
-  .then(data => { BRENTON_LXX = data; });
-
 function populateBibleBooks() {
   const bookSel = document.getElementById('bibleBook');
   bookSel.innerHTML = '';
@@ -110,7 +105,16 @@ function populateBibleChapters() {
   }
 }
 
-async function loadBiblePassage() {
+// Only run loadBiblePassage after JSON is loaded!
+function safeLoadBiblePassage() {
+  if (!BRENTON_LXX) {
+    setTimeout(safeLoadBiblePassage, 100);
+    return;
+  }
+  loadBiblePassage();
+}
+
+function loadBiblePassage() {
   const bookSel = document.getElementById('bibleBook');
   const chapSel = document.getElementById('bibleChapter');
   const versionSel = document.getElementById('bibleVersion');
@@ -131,15 +135,16 @@ async function loadBiblePassage() {
     const bookData = BRENTON_LXX[book.lxx];
     if (!bookData) {
       bibleContent.innerHTML = `<div class="error">Book not found in LXX JSON: ${book.lxx}</div>`;
-      console.log("Available LXX books:", Object.keys(BRENTON_LXX));
+      console.log("Available books:", Object.keys(BRENTON_LXX));
       return;
     }
-    if (!bookData[chapter]) {
-      bibleContent.innerHTML = `<div class="error">Chapter not found in LXX JSON: ${book.lxx} ${chapter}</div>`;
+    const chapterStr = String(chapter);
+    if (!bookData[chapterStr]) {
+      bibleContent.innerHTML = `<div class="error">Chapter not found in LXX JSON: ${book.lxx} ${chapterStr}</div>`;
       console.log("Available chapters for this book:", Object.keys(bookData));
       return;
     }
-    bibleContent.innerHTML = bookData[chapter].map((v, idx) =>
+    bibleContent.innerHTML = bookData[chapterStr].map((v, idx) =>
       `<span class="bible-verse-num">${idx + 1}</span> <span class="bible-verse-text">${v.text}</span>` +
       (v.footnotes && v.footnotes.length
         ? `<span class="bible-footnotes"><sup>[${v.footnotes.join('; ')}]</sup></span>`
@@ -153,39 +158,43 @@ async function loadBiblePassage() {
     try {
       const ref = `${book.kjv} ${chapter}`;
       const url = `https://bible-api.com/${encodeURIComponent(ref)}?translation=kjv`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.verses && data.verses.length > 0) {
-        bibleContent.innerHTML = data.verses.map(v =>
-          `<span class="bible-verse-num">${v.verse}</span> <span class="bible-verse-text">${v.text.trim()}</span>`
-        ).join(' ');
-        return;
-      }
-      bibleContent.innerHTML = `<div class="error">No verses found for this chapter.</div>`;
+      fetch(url).then(res => res.json()).then(data => {
+        if (data.verses && data.verses.length > 0) {
+          bibleContent.innerHTML = data.verses.map(v =>
+            `<span class="bible-verse-num">${v.verse}</span> <span class="bible-verse-text">${v.text.trim()}</span>`
+          ).join(' ');
+        } else {
+          bibleContent.innerHTML = `<div class="error">No verses found for this chapter.</div>`;
+        }
+      });
     } catch (e) {
       bibleContent.innerHTML = `<div class="error">Unable to load passage.</div>`;
     }
   }
 }
 
+// Load JSON and only enable UI when ready
 document.addEventListener('DOMContentLoaded', function () {
   populateBibleBooks();
   populateBibleChapters();
+
+  fetch('js/brenton-lxx-complete.json')
+    .then(res => res.json())
+    .then(data => {
+      BRENTON_LXX = data;
+      // Now safe to enable UI
+      document.getElementById('bibleGoBtn').disabled = false;
+    });
 
   document.getElementById('bibleBook').addEventListener('change', function () {
     populateBibleChapters();
   });
 
   document.getElementById('bibleGoBtn').addEventListener('click', function () {
-    loadBiblePassage();
+    safeLoadBiblePassage();
   });
 
   document.getElementById('bibleVersion').addEventListener('change', function () {
-    loadBiblePassage();
+    safeLoadBiblePassage();
   });
 });
-
-
-
-
-
