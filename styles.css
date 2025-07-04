@@ -52,6 +52,7 @@ body {
 nav {
     margin-bottom: 18px;
     display: flex;
+    flex-wrap: wrap;      /* NEW: allow wrapping on small screens */
     justify-content: center;
     gap: 18px;
 }
@@ -514,6 +515,20 @@ nav a:hover, nav a:focus {
         font-size: 1em;
         border-radius: 8px;
         max-height: 65vh;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    nav a {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 1.13em;
+        padding: 14px 0;
+        margin: 0;
     }
 }
 
