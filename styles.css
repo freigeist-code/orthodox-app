@@ -530,6 +530,20 @@ nav a:hover, nav a:focus {
     outline: none;
 }
 
+.nav-btn {
+    min-width: 38px;
+    padding: 8px 12px;
+    font-size: 1.25em;
+    margin: 0 2px;
+}
+@media (max-width: 600px) {
+    .nav-btn {
+        min-width: 32px;
+        padding: 8px 0;
+        font-size: 1.1em;
+    }
+}
+
 @media (max-width: 600px) {
     .main-nav {
         flex-direction: column;
