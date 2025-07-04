@@ -494,6 +494,57 @@ nav a:hover, nav a:focus {
     border-radius: 8px;
     border-left: 4px solid #ffd700;
 }
+
+.main-nav {
+    margin-bottom: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+}
+
+.main-nav a {
+    color: var(--gold);
+    background: #1a1a1a;
+    border: 1.5px solid var(--gold);
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Share Tech Mono', 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.08em;
+    padding: 8px 18px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 0 1.5px #ffd70033;
+    min-width: 100px;
+    text-align: center;
+    display: inline-block;
+}
+
+.main-nav a:hover, .main-nav a:focus {
+    background: var(--gold);
+    color: #181824;
+    border-color: var(--red);
+    box-shadow: 0 0 0 2.5px var(--red), 0 0 16px #ffd70055;
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .main-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+    .main-nav a {
+        width: 100%;
+        font-size: 1em;
+        padding: 12px 0;
+        margin: 0;
+        min-width: 0;
+    }
+}
    
 @media (max-width: 600px) {
     .container {
