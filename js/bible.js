@@ -103,20 +103,10 @@ function updateArrowButtons() {
 
   prevBtn.disabled = (chapter === 1 && bookSel.value == 0);
   nextBtn.disabled = (chapter === book.chapters && bookSel.value == BOOKS.length - 1);
-  // Disable prev if at first chapter of first book
-  // Disable next if at last chapter of last book
-  if (chapter > 1) {
-    prevBtn.disabled = false;
-  }
-  if (chapter < book.chapters) {
-    nextBtn.disabled = false;
-  }
-  if (chapter === 1 && bookSel.value == 0) {
-    prevBtn.disabled = true;
-  }
-  if (chapter === book.chapters && bookSel.value == BOOKS.length - 1) {
-    nextBtn.disabled = true;
-  }
+  if (chapter > 1) prevBtn.disabled = false;
+  if (chapter < book.chapters) nextBtn.disabled = false;
+  if (chapter === 1 && bookSel.value == 0) prevBtn.disabled = true;
+  if (chapter === book.chapters && bookSel.value == BOOKS.length - 1) nextBtn.disabled = true;
 }
 
 function loadBiblePassage() {
@@ -201,10 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
     loadBiblePassage();
   });
 
-  document.getElementById('bibleGoBtn').addEventListener('click', function () {
-    loadBiblePassage();
-  });
-
   document.getElementById('prevChapterBtn').addEventListener('click', function () {
     goToPrevChapter();
   });
@@ -212,5 +198,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('nextChapterBtn').addEventListener('click', function () {
     goToNextChapter();
   });
+
+  // Load the first passage on page load
+  loadBiblePassage();
 });
 
