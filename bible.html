@@ -21,10 +21,12 @@
         <a href="prayers.html">Prayer Rule</a>
       </nav>
       <div class="bible-nav" style="margin: 16px 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
-        <select id="bibleBook" class="bible-dropdown"></select>
-        <select id="bibleChapter" class="bible-dropdown"></select>
-        <button id="bibleGoBtn" class="nav-btn" style="font-size:1em;">Go</button>
-      </div>
+  <button id="prevChapterBtn" class="nav-btn" title="Previous chapter" aria-label="Previous chapter">&lt;</button>
+  <select id="bibleBook" class="bible-dropdown"></select>
+  <select id="bibleChapter" class="bible-dropdown"></select>
+  <button id="nextChapterBtn" class="nav-btn" title="Next chapter" aria-label="Next chapter">&gt;</button>
+  <button id="bibleGoBtn" class="nav-btn" style="font-size:1em;">Go</button>
+</div>
       <div class="bible-version-notice" style="margin: 18px 0 0 0; text-align:center;">
         <em>
           This is the <b>King James Version</b>.<br>
