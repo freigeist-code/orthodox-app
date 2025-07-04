@@ -1,6 +1,6 @@
 let BRENTON_LXX = null;
 
-// Orthodox book order and mapping (use the exact keys from your JSON)
+// Orthodox order, using JSON's exact book names and chapter counts
 const BOOKS = [
   { name: "Genesis", lxx: "Genesis", kjv: "Genesis", chapters: 50 },
   { name: "Exodus", lxx: "Exodus", kjv: "Exodus", chapters: 40 },
@@ -81,6 +81,15 @@ const BOOKS = [
   { name: "Revelation", lxx: "Revelation", kjv: "Revelation", chapters: 22 }
 ];
 
+// Wait for JSON to load before allowing passage lookup
+function ensureLxxLoaded(callback) {
+  if (BRENTON_LXX) {
+    callback();
+  } else {
+    setTimeout(() => ensureLxxLoaded(callback), 50);
+  }
+}
+
 function populateBibleBooks() {
   const bookSel = document.getElementById('bibleBook');
   bookSel.innerHTML = '';
@@ -105,15 +114,6 @@ function populateBibleChapters() {
   }
 }
 
-// Only run loadBiblePassage after JSON is loaded!
-function safeLoadBiblePassage() {
-  if (!BRENTON_LXX) {
-    setTimeout(safeLoadBiblePassage, 100);
-    return;
-  }
-  loadBiblePassage();
-}
-
 function loadBiblePassage() {
   const bookSel = document.getElementById('bibleBook');
   const chapSel = document.getElementById('bibleChapter');
@@ -135,7 +135,7 @@ function loadBiblePassage() {
     const bookData = BRENTON_LXX[book.lxx];
     if (!bookData) {
       bibleContent.innerHTML = `<div class="error">Book not found in LXX JSON: ${book.lxx}</div>`;
-      console.log("Available books:", Object.keys(BRENTON_LXX));
+      console.log("Available LXX books:", Object.keys(BRENTON_LXX));
       return;
     }
     const chapterStr = String(chapter);
@@ -173,28 +173,24 @@ function loadBiblePassage() {
   }
 }
 
-// Load JSON and only enable UI when ready
 document.addEventListener('DOMContentLoaded', function () {
   populateBibleBooks();
   populateBibleChapters();
 
   fetch('js/brenton-lxx-complete.json')
     .then(res => res.json())
-    .then(data => {
-      BRENTON_LXX = data;
-      // Now safe to enable UI
-      document.getElementById('bibleGoBtn').disabled = false;
-    });
+    .then(data => { BRENTON_LXX = data; });
 
   document.getElementById('bibleBook').addEventListener('change', function () {
     populateBibleChapters();
   });
 
   document.getElementById('bibleGoBtn').addEventListener('click', function () {
-    safeLoadBiblePassage();
+    ensureLxxLoaded(loadBiblePassage);
   });
 
   document.getElementById('bibleVersion').addEventListener('change', function () {
-    safeLoadBiblePassage();
+    ensureLxxLoaded(loadBiblePassage);
   });
 });
+
