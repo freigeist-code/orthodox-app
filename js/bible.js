@@ -1,5 +1,7 @@
+let BRENTON_LXX = null;
+
+// Orthodox book order and mapping (use the exact keys from your JSON)
 const BOOKS = [
-  // Old Testament (Orthodox order, using your JSON keys)
   { name: "Genesis", lxx: "Genesis", kjv: "Genesis", chapters: 50 },
   { name: "Exodus", lxx: "Exodus", kjv: "Exodus", chapters: 40 },
   { name: "Leviticus", lxx: "Leviticus", kjv: "Leviticus", chapters: 27 },
@@ -79,8 +81,6 @@ const BOOKS = [
   { name: "Revelation", lxx: "Revelation", kjv: "Revelation", chapters: 22 }
 ];
 
-let BRENTON_LXX = null;
-
 // Load the JSON once on page load
 fetch('js/brenton-lxx-complete.json')
   .then(res => res.json())
@@ -131,16 +131,18 @@ async function loadBiblePassage() {
     const bookData = BRENTON_LXX[book.lxx];
     if (!bookData) {
       bibleContent.innerHTML = `<div class="error">Book not found in LXX JSON: ${book.lxx}</div>`;
+      console.log("Available LXX books:", Object.keys(BRENTON_LXX));
       return;
     }
     if (!bookData[chapter]) {
       bibleContent.innerHTML = `<div class="error">Chapter not found in LXX JSON: ${book.lxx} ${chapter}</div>`;
+      console.log("Available chapters for this book:", Object.keys(bookData));
       return;
     }
     bibleContent.innerHTML = bookData[chapter].map((v, idx) =>
       `<span class="bible-verse-num">${idx + 1}</span> <span class="bible-verse-text">${v.text}</span>` +
       (v.footnotes && v.footnotes.length
-        ? `<span class="bible-footnotes"> <sup>[${v.footnotes.join('; ')}]</sup></span>`
+        ? `<span class="bible-footnotes"><sup>[${v.footnotes.join('; ')}]</sup></span>`
         : '')
     ).join(' ');
   } else if (version === "KJV") {
@@ -182,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadBiblePassage();
   });
 });
+
 
 
 
