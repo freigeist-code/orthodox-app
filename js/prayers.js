@@ -235,10 +235,7 @@ To the Saint that has the salve perfect for my particular wounds—pray for me. 
 `, // Thursday
       5: `<strong>Mission Parish Saint Intercessions</strong>
 
-<strong>The Holy Protection of the Theotokos</strong>
-O Most-Holy Theotokos, you who spread your protecting veil over the faithful in times of danger, shelter me and all those I love beneath your holy protection. As you appeared in Blachernae and saved your people from peril, intercede for us in every trial, storm, and crisis. Cover our parish, our city, and all the world with your unfailing intercession, and grant us deliverance, peace, and the shelter of your mercy. (<i>metania</i>)
-
-<strong>Prayer to St. Barnabas the Apostle</strong>
+<strong>Prayer to our Patron St. Barnabas the Apostle</strong>
 O holy Apostle Barnabas, companion of the Apostles and son of encouragement, you were filled with faith and the Holy Spirit and set apart to bring the light of Christ to many nations.
 You traveled far and wide, preaching the Gospel with courage, generosity, and joy, comforting the weary, reconciling the divided, and strengthening the Church in love and unity.
 Intercede for us, O blessed Barnabas, that we too may have boldness to proclaim Christ in word and deed, generosity to support the mission of the Church, and courage to persevere in faith, especially in times of trial.
@@ -246,6 +243,13 @@ Pray that our parish may be a beacon of hope, unity, and welcome for all peoples
 By your prayers, may the Gospel be spread in our land, the poor be comforted, and the Church be strengthened in every good work.
 O gentle encourager and faithful apostle, ask the Lord to grant us the spirit of peace, zeal, and steadfastness that you showed, that we may reflect the love of Christ in all we do.
 St. Barnabas, pray for us and for the renewal of the Church in every place! (<i>metania</i>)
+<strong>Troparion — Tone 3</strong>
+Holy Apostles Bartholomew and Barnabas, / entreat the merciful God / to grant our souls forgiveness of transgressions.
+<strong>Kontakion — Tone 3</strong>
+You became a true servant of the Lord / and appeared as the first among the Seventy Apostles; / together with Paul you set your preaching in a clear light / revealing Christ as Savior to all; / therefore with hymns we celebrate your godly memory, O Barnabas.
+
+<strong>The Holy Protection of the Theotokos</strong>
+O Most-Holy Theotokos, you who spread your protecting veil over the faithful in times of danger, shelter me and all those I love beneath your holy protection. As you appeared in Blachernae and saved your people from peril, intercede for us in every trial, storm, and crisis. Cover our parish, our city, and all the world with your unfailing intercession, and grant us deliverance, peace, and the shelter of your mercy. (<i>metania</i>)
 
 <strong>St. Herman of Alaska</strong>
 O Venerable Father Herman, wonderworker of all America, who endured the wilderness and calmed storms by your prayers, intercede for us. Defend us from every danger, inspire us to love God and neighbor, and teach us to serve the least among us with humility and compassion. Pray that our parish may be a beacon of faith and a refuge for all who seek Christ. (<i>metania</i>)
@@ -360,3 +364,4 @@ function updatePrayerContent() {
 document.addEventListener('DOMContentLoaded', function () {
     updatePrayerContent();
 });
+
